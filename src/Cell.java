@@ -1,28 +1,23 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Cell extends JButton {
 
-    /* Type :
-       0 --> EMPTY
-       1 --> MINE
-       2 --> NUMBER */
-    private final int type;
     private int position;
+    private int bombCount; // if -1 --> MineCell
     private boolean discovered;
     private boolean flagged;
+    private Icon cellIcon;
 
-    public Cell(int type, boolean discovered, boolean flagged) {
-        this.type = type;
-        this.discovered = discovered;
-        this.flagged = flagged;
+    public Cell(int bombCount) {
+        this.discovered = false;
+        this.flagged = false;
+        this.bombCount = bombCount;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public int getPosition() {
-        return position;
+    public int getBombCount() {
+        return bombCount;
     }
 
     public boolean isDiscovered() {
@@ -33,6 +28,10 @@ public class Cell extends JButton {
         return flagged;
     }
 
+    public Icon getCellIcon() {
+        return cellIcon;
+    }
+
     public void setDiscovered(boolean discovered) {
         this.discovered = discovered;
     }
@@ -41,4 +40,8 @@ public class Cell extends JButton {
         this.flagged = flagged;
     }
 
+    public void setCellIcon(Icon cellIcon) {
+        if(!this.isDiscovered())
+            this.cellIcon = cellIcon;
+    }
 }
